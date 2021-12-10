@@ -13,49 +13,184 @@ namespace AdventCode
         Dictionary<int, long> joltcount = new Dictionary<int, long>();
         public override string Part1()
         {
+            
+    //): 3 points.
+    //]: 57 points.
+    //}: 1197 points.
+    //>: 25137 points.
+
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            StreamReader sr = new StreamReader("c:\\temp\\advent_2021\\advent_2021_day10.txt");
+            StreamReader sr = new StreamReader("c:\\temp\\advent_2021\\advent_2021_" + this.GetType().Name + ".txt");
 
             string ln = "";
             int valid = 0;
+            int synval = 0;
 
             while ((ln = sr.ReadLine()) != null)
             {
-
+                int thisval = ParseChunk(ln);
+                if (thisval > 0)
+                {
+                    Debug.WriteLine(ln);
+                }
+                synval += thisval;
             }
             sw.Stop();
 
             sr.Close();
 
-            string ret = "Answer : " + valid.ToString();
+            string ret = "Answer : " + synval.ToString();
             ret += Environment.NewLine + "Time: " + sw.ElapsedMilliseconds.ToString();
             return ret;
         }
 
         public override string Part2()
         {
+            //): 3 points.
+            //]: 57 points.
+            //}: 1197 points.
+            //>: 25137 points.
+
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            StreamReader sr = new StreamReader("c:\\temp\\advent_2021\\advent_2021_day10.txt");
-
+            StreamReader sr = new StreamReader("c:\\temp\\advent_2021\\advent_2021_" + this.GetType().Name + ".txt");
+            List<long> scores = new List<long>();
             string ln = "";
-            int valid = 0;
-
+            
             while ((ln = sr.ReadLine()) != null)
             {
-
+                long thisval = ParseChunkComplete(ln);
+                if (thisval > 0)
+                {
+                    Debug.WriteLine(ln + " - " + thisval.ToString());
+                }
+                if (thisval > 0)
+                {
+                    scores.Add(thisval);
+                }
+                
+                
             }
             sw.Stop();
-
             sr.Close();
 
-            string ret = "Answer : " + valid.ToString();
+            scores.Sort();
+            long synval = scores[(scores.Count ) / 2];
+
+            string ret = "Answer : " + synval.ToString();
             ret += Environment.NewLine + "Time: " + sw.ElapsedMilliseconds.ToString();
             return ret;
 
 
         }
 
+        int ParseChunk(string inp)
+        {
+            //): 3 points.
+            //]: 57 points.
+            //}: 1197 points.
+            //>: 25137 points.
+            int endlen = inp.Length-1;
+            int startlen = inp.Length;
+
+            while (startlen > endlen && endlen > 0)
+            {
+                startlen = inp.Length;
+                inp = inp.Replace("<>", "").Replace("{}", "").Replace("[]", "").Replace("()", "");
+                endlen = inp.Length;
+            }
+            
+            if (endlen == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                for (int i = 1; i < inp.Length; i++)
+                {
+                    
+                    switch (inp.Substring(i, 1))
+                    {
+                        case "}":
+                            return 1197;
+                        case ")":
+                            return 3;
+                        case "]":
+                            return 57;
+                        case ">":
+                            return 25137;
+                    }
+                }
+            }
+            return 0;
+
+        }
+
+
+        long ParseChunkComplete(string inp)
+        {
+            //): 3 points.
+            //]: 57 points.
+            //}: 1197 points.
+            //>: 25137 points.
+            int endlen = inp.Length - 1;
+            int startlen = inp.Length;
+
+            while (startlen > endlen && endlen > 0)
+            {
+                startlen = inp.Length;
+                inp = inp.Replace("<>", "").Replace("{}", "").Replace("[]", "").Replace("()", "");
+                endlen = inp.Length;
+            }
+
+            if (endlen == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                string lastc = inp.Substring(0, 1);
+                for (int i = 1; i < inp.Length; i++)
+                {
+                    switch (inp.Substring(i, 1))
+                    {
+                        case "}":
+                        case ")":
+                        case "]":
+                        case ">":
+                            return 0;
+                    }
+                }
+            }
+
+            long repval = 0;
+            // chunk incomplete
+            for (int i = inp.Length-1; i >=0; i--)
+            {
+                string thisc = inp.Substring(i, 1);
+                switch (thisc)
+                {
+                    case "{":
+                        repval *= 5;
+                        repval += 3;
+                        break;
+                    case "(":
+                        repval *= 5;
+                        repval += 1;
+                        break;
+                    case "[":
+                        repval *= 5;
+                        repval += 2;
+                        break;
+                    case "<":
+                        repval *= 5;
+                        repval += 4;
+                        break;
+                }
+            }
+            return repval;
+
+        }
     }
 }

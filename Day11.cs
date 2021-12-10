@@ -14,7 +14,7 @@ namespace AdventCode
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            StreamReader sr = new StreamReader("c:\\temp\\advent_2021\\advent_2021_day11.txt");
+            StreamReader sr = new StreamReader("c:\\temp\\advent_2021\\advent_2021_" + this.GetType().Name + ".txt");
 
             string ln = "";
             int valid = 0;
@@ -36,7 +36,7 @@ namespace AdventCode
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            StreamReader sr = new StreamReader("c:\\temp\\advent_2021\\advent_2021_day11.txt");
+            StreamReader sr = new StreamReader("c:\\temp\\advent_2021\\advent_2021_" + this.GetType().Name + ".txt");
 
             string ln = "";
             int valid = 0;
