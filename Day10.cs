@@ -30,10 +30,7 @@ namespace AdventCode
             while ((ln = sr.ReadLine()) != null)
             {
                 int thisval = ParseChunk(ln);
-                if (thisval > 0)
-                {
-                    Debug.WriteLine(ln);
-                }
+                
                 synval += thisval;
             }
             sw.Stop();
@@ -61,10 +58,7 @@ namespace AdventCode
             while ((ln = sr.ReadLine()) != null)
             {
                 long thisval = ParseChunkComplete(ln);
-                if (thisval > 0)
-                {
-                    Debug.WriteLine(ln + " - " + thisval.ToString());
-                }
+                
                 if (thisval > 0)
                 {
                     scores.Add(thisval);
@@ -109,7 +103,6 @@ namespace AdventCode
             {
                 for (int i = 1; i < inp.Length; i++)
                 {
-                    
                     switch (inp.Substring(i, 1))
                     {
                         case "}":
@@ -124,7 +117,6 @@ namespace AdventCode
                 }
             }
             return 0;
-
         }
 
 
@@ -168,8 +160,7 @@ namespace AdventCode
             // chunk incomplete
             for (int i = inp.Length-1; i >=0; i--)
             {
-                string thisc = inp.Substring(i, 1);
-                switch (thisc)
+                switch (inp.Substring(i, 1))
                 {
                     case "{":
                         repval *= 5;
