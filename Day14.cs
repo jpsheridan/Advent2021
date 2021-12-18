@@ -125,10 +125,10 @@ namespace AdventCode
                 pairs = new Dictionary<string, long>(newpairs);
             }
 
-            foreach (KeyValuePair<string, long> c in elementcount)
-            {
-                Debug.WriteLine(c.Key + " - " + c.Value);
-            }
+            //foreach (KeyValuePair<string, long> c in elementcount)
+            //{
+            //    Debug.WriteLine(c.Key + " - " + c.Value);
+            //}
 
             long min = long.MaxValue;
             long max = long.MinValue;
@@ -204,5 +204,6 @@ namespace AdventCode
 
             return (max-min);
         }
+
     }
 }
