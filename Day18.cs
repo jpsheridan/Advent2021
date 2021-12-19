@@ -52,7 +52,7 @@ namespace AdventCode
             {
                 snailnums.Add(ln);
             }
-            sw.Stop();
+            
             int maxsum = 0;
 
             for (int i = 0; i < snailnums.Count-1; i++)
@@ -80,7 +80,7 @@ namespace AdventCode
 
 
             sr.Close();
-            
+            sw.Stop();
             valid = GetSum(sn);
 
 
@@ -225,7 +225,8 @@ namespace AdventCode
                 if (havenum && !changed)
                 {
                     string newstr = GetSplitStr(int.Parse(savenum));
-                    sn = sn.Substring(0, numstart) + newstr + sn.Substring(numend); 
+                    sn = sn.Substring(0, numstart) + newstr + sn.Substring(numend);
+                    
                     changed = true;
                     havenum = false;
                 }
@@ -296,6 +297,7 @@ namespace AdventCode
                         int n = int.Parse(thisnum);
                         n += num;
                         ret = ret.Substring(0, i+1) + n.ToString() + ret.Substring(end+1);
+                
                         break;
                     }
                 }
