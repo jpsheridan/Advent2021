@@ -381,52 +381,6 @@ namespace AdventCode
         }
 
 
-        long ProcessList3(List<string> input)
-        {
-            List<cuboid> cuboids = new List<cuboid>();
-            List<cuboid> cuboids2 = new List<cuboid>();
-            Regex regex = new Regex(@"^(on|off) x=(-?\d+|-)\.\.(-?\d+|-),y=(-?\d+|-)\.\.(-?\d+|-),z=(-?\d+|-)\.\.(-?\d+|-)$");
-
-            foreach (string line in input)
-            {
-                Match match = regex.Match(line);
-                if (match.Success)
-                {
-                    bool setOn = match.Groups[1].Value == "on";
-                    (int x1, int x2, int y1, int y2, int z1, int z2) = (
-                        int.Parse(match.Groups[2].Value),
-                        int.Parse(match.Groups[3].Value),
-                        int.Parse(match.Groups[4].Value),
-                        int.Parse(match.Groups[5].Value),
-                        int.Parse(match.Groups[6].Value),
-                        int.Parse(match.Groups[7].Value)
-                    );
-                    cuboid newcuboid = GetCuboid(setOn, x1, x2, y1, y2, z1, z2);
-
-                    for (int i = 0; i < cuboids.Count; i++)
-                    {
-                        //cuboids2.AddRange(Abjunction(cuboids[i], newcuboid));
-                        List<cuboid> intersection = Findintersect(cuboids[i], newcuboid);
-                        cuboids2.AddRange(intersection);
-                    }
-                    if (setOn)
-                        cuboids2.Add(newcuboid);
-
-                    (cuboids, cuboids2) = (cuboids2, cuboids);
-                    cuboids2.Clear();
-                }
-            }
-
-            long sumcubes = 0;
-            foreach (cuboid c in cuboids)
-            {
-                long v = ((c.x2 - c.x1) + 1) * ((c.y2 - c.y1) + 1) * ((c.z2 - c.z1) + 1);
-
-                sumcubes += v;
-            }
-            return sumcubes;
-        }
-    
     }
 }
 
